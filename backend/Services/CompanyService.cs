@@ -19,7 +19,7 @@ public class CompanyService
         _relevanceService = relevanceService;
     }
 
-    public async Task<(bool Success, Company? Company, string? Error, double RelevanceScore)> CreateCompanyAsync(string name, string websiteUrl)
+    public virtual async Task<(bool Success, Company? Company, string? Error, double RelevanceScore)> CreateCompanyAsync(string name, string websiteUrl)
     {
         var validation = _validationService.ValidateCompany(name, websiteUrl);
         if (!validation.IsValid)
@@ -30,17 +30,17 @@ public class CompanyService
         return (true, result, null, validation.RelevanceScore);
     }
 
-    public async Task<Company?> GetCompanyByIdAsync(int id)
+    public virtual async Task<Company?> GetCompanyByIdAsync(int id)
     {
         return await _repository.GetByIdAsync(id);
     }
 
-    public async Task<List<Company>> GetAllCompaniesAsync()
+    public virtual async Task<List<Company>> GetAllCompaniesAsync()
     {
         return await _repository.GetAllAsync();
     }
 
-    public async Task<List<Company>> SearchCompaniesByNameAsync(string name)
+    public virtual async Task<List<Company>> SearchCompaniesByNameAsync(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
             return new List<Company>();
@@ -48,7 +48,7 @@ public class CompanyService
         return await _repository.SearchByNameAsync(name);
     }
 
-    public async Task<List<Company>> SearchCompaniesByDomainAsync(string domain)
+    public virtual async Task<List<Company>> SearchCompaniesByDomainAsync(string domain)
     {
         if (string.IsNullOrWhiteSpace(domain))
             return new List<Company>();
@@ -56,7 +56,7 @@ public class CompanyService
         return await _repository.SearchByDomainAsync(domain);
     }
 
-    public async Task<List<Company>> SearchByRelevanceAsync(string searchTerm)
+    public virtual async Task<List<Company>> SearchByRelevanceAsync(string searchTerm)
     {
         if (string.IsNullOrWhiteSpace(searchTerm))
             return new List<Company>();

@@ -11,7 +11,7 @@ public class ValidationService
         _relevanceService = relevanceService;
     }
 
-    public ValidationResult ValidateCompany(string name, string websiteUrl)
+    public virtual ValidationResult ValidateCompany(string name, string websiteUrl)
     {
         // Validate company name
         var nameValidation = ValidateName(name);

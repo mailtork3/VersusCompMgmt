@@ -6,7 +6,7 @@ public class RelevanceService
     /// Calculate relevance score between company name and website URL using domain/keyword matching.
     /// Returns a score from 0-100.
     /// </summary>
-    public double CalculateRelevance(string companyName, string websiteUrl)
+    public virtual double CalculateRelevance(string companyName, string websiteUrl)
     {
         string domain = ExtractDomain(websiteUrl);
         List<string> companyKeywords = ExtractKeywords(companyName);
