@@ -1,0 +1,24 @@
+<div class="app-container">
+  <header class="app-header">
+    <h1>{{ title() }}</h1>
+    <p>Manage your companies and search with filters</p>
+  </header>
+
+  <main class="app-main">
+    <div class="content-wrapper">
+      <div class="left-panel">
+        <app-company-form (companyCreated)="onCompanyCreated($event)"></app-company-form>
+      </div>
+
+      <div class="right-panel">
+        <app-company-list [refreshTrigger]="refreshCounter()"></app-company-list>
+      </div>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <p>&copy; 2026 Company Management API. All rights reserved.</p>
+  </footer>
+</div>
+
+<router-outlet />

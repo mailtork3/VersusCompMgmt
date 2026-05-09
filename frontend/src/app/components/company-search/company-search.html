@@ -1,0 +1,105 @@
+<div class="search-container">
+  <h2>Search Companies</h2>
+
+  <div class="tabs">
+    <button
+      [class.active]="activeTab === 'name'"
+      (click)="activeTab = 'name'"
+      class="tab-btn"
+    >
+      By Name
+    </button>
+    <button
+      [class.active]="activeTab === 'domain'"
+      (click)="activeTab = 'domain'"
+      class="tab-btn"
+    >
+      By Domain
+    </button>
+    <button
+      [class.active]="activeTab === 'relevance'"
+      (click)="activeTab = 'relevance'"
+      class="tab-btn"
+    >
+      By Relevance
+    </button>
+  </div>
+
+  <div class="tab-content">
+    <!-- Search by Name -->
+    <div *ngIf="activeTab === 'name'" class="search-form">
+      <div class="form-group">
+        <label for="nameInput">Company Name</label>
+        <input
+          id="nameInput"
+          [(ngModel)]="searchName"
+          placeholder="e.g., Apple"
+          class="form-control"
+        />
+      </div>
+      <button (click)="searchByName()" [disabled]="isSearching" class="btn btn-primary">
+        {{ isSearching ? 'Searching...' : 'Search by Name' }}
+      </button>
+    </div>
+
+    <!-- Search by Domain -->
+    <div *ngIf="activeTab === 'domain'" class="search-form">
+      <div class="form-group">
+        <label for="domainInput">Website Domain</label>
+        <input
+          id="domainInput"
+          [(ngModel)]="searchDomain"
+          placeholder="e.g., apple.com"
+          class="form-control"
+        />
+      </div>
+      <button (click)="searchByDomain()" [disabled]="isSearching" class="btn btn-primary">
+        {{ isSearching ? 'Searching...' : 'Search by Domain' }}
+      </button>
+    </div>
+
+    <!-- Search by Relevance -->
+    <div *ngIf="activeTab === 'relevance'" class="search-form">
+      <div class="form-group">
+        <label for="relevanceInput">Search Term</label>
+        <input
+          id="relevanceInput"
+          [(ngModel)]="searchRelevance"
+          placeholder="e.g., Microsoft"
+          class="form-control"
+        />
+      </div>
+      <button (click)="searchByRelevance()" [disabled]="isSearching" class="btn btn-primary">
+        {{ isSearching ? 'Searching...' : 'Search by Relevance' }}
+      </button>
+    </div>
+
+    <button (click)="clearSearch()" class="btn btn-secondary" *ngIf="searchPerformed">
+      Clear Search
+    </button>
+  </div>
+
+  <div class="alert alert-error" *ngIf="errorMessage">
+    <strong>Error:</strong> {{ errorMessage }}
+  </div>
+
+  <div *ngIf="searchPerformed && results.length === 0 && !isSearching && !errorMessage" class="no-results">
+    No results found.
+  </div>
+
+  <div *ngIf="results.length > 0" class="results-container">
+    <h3>Search Results ({{ results.length }})</h3>
+    <div class="results-list">
+      <div *ngFor="let company of results" class="result-item">
+        <h4>{{ company.name }}</h4>
+        <p>
+          <strong>Website:</strong>
+          <a [href]="company.websiteUrl" target="_blank" rel="noopener noreferrer">
+            {{ company.websiteUrl }}
+          </a>
+        </p>
+        <p><small>Created: {{ company.createdAt | date: 'short' }}</small></p>
+      </div>
+    </div>
+  </div>
+</div>

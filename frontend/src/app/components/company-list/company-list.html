@@ -1,0 +1,77 @@
+<div class="company-list-container">
+
+  <div class="list-header">
+    <h2>
+      Companies
+      <span class="count-badge" *ngIf="!isLoading">
+        {{ searchActive ? (companies.length + ' of ' + allCompanies.length) : companies.length }}
+      </span>
+    </h2>
+  </div>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (keydown)="onKeydown($event)"
+      placeholder="Search companies..."
+      class="search-input"
+      [disabled]="isLoading"
+    />
+    <select [(ngModel)]="searchType" class="search-type-select" [disabled]="isLoading">
+      <option value="name">By Name</option>
+      <option value="domain">By Domain</option>
+      <option value="relevance">By Relevance</option>
+    </select>
+    <button (click)="search()" [disabled]="isLoading || isSearching" class="btn btn-primary">
+      {{ isSearching ? 'Searching...' : 'Search' }}
+    </button>
+    <button *ngIf="searchActive" (click)="clearSearch()" class="btn btn-secondary">
+      Clear
+    </button>
+  </div>
+
+  <div *ngIf="searchActive && !isSearching" class="search-status">
+    {{ companies.length }} result{{ companies.length !== 1 ? 's' : '' }} for
+    <strong>"{{ searchTerm }}"</strong>
+  </div>
+
+  <div *ngIf="isLoading || isSearching" class="loading">
+    {{ isLoading ? 'Loading companies...' : 'Searching...' }}
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-error">
+    <strong>Error:</strong> {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!isLoading && !isSearching && companies.length === 0 && !errorMessage" class="no-data">
+    <ng-container *ngIf="searchActive">No results found for "{{ searchTerm }}".</ng-container>
+    <ng-container *ngIf="!searchActive">No companies yet. Add one using the form.</ng-container>
+  </div>
+
+  <div *ngIf="companies.length > 0 && !isLoading && !isSearching" class="table-container">
+    <table class="companies-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Company Name</th>
+          <th>Website</th>
+          <th>Created At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let company of companies" class="company-row">
+          <td>{{ company.id }}</td>
+          <td>{{ company.name }}</td>
+          <td>
+            <a [href]="company.websiteUrl" target="_blank" rel="noopener noreferrer">
+              {{ company.websiteUrl }}
+            </a>
+          </td>
+          <td>{{ company.createdAt | date: 'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

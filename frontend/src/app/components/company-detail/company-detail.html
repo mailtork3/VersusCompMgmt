@@ -1,0 +1,36 @@
+<div class="detail-container">
+  <button (click)="goBack()" class="btn btn-back">← Back to List</button>
+
+  <div *ngIf="isLoading" class="loading">
+    Loading company details...
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-error">
+    <strong>Error:</strong> {{ errorMessage }}
+  </div>
+
+  <div *ngIf="company && !isLoading" class="company-detail">
+    <h1>{{ company.name }}</h1>
+
+    <div class="detail-card">
+      <div class="detail-row">
+        <label>Company ID:</label>
+        <span>{{ company.id }}</span>
+      </div>
+
+      <div class="detail-row">
+        <label>Website URL:</label>
+        <span>
+          <a [href]="company.websiteUrl" target="_blank" rel="noopener noreferrer">
+            {{ company.websiteUrl }}
+          </a>
+        </span>
+      </div>
+
+      <div class="detail-row">
+        <label>Created At:</label>
+        <span>{{ company.createdAt | date: 'medium' }}</span>
+      </div>
+    </div>
+  </div>
+</div>

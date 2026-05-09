@@ -1,0 +1,51 @@
+<div class="company-form-container">
+  <h2>Add a New Company</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Company Name</label>
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        placeholder="e.g., Apple Inc."
+        class="form-control"
+      />
+      <div class="error-message" *ngIf="name?.invalid && name?.touched">
+        <span *ngIf="name?.errors?.['required']">Company name is required.</span>
+        <span *ngIf="name?.errors?.['minlength']">Company name must be at least 3 characters.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="website">Website URL</label>
+      <input
+        id="website"
+        type="text"
+        formControlName="websiteUrl"
+        placeholder="e.g., https://www.apple.com"
+        class="form-control"
+      />
+      <div class="error-message" *ngIf="websiteUrl?.invalid && websiteUrl?.touched">
+        <span *ngIf="websiteUrl?.errors?.['required']">Website URL is required.</span>
+        <span *ngIf="websiteUrl?.errors?.['pattern']">Website URL must be a valid URL (e.g., https://www.example.com).</span>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="form.invalid || isSubmitting"
+      class="btn btn-primary"
+    >
+      {{ isSubmitting ? 'Creating...' : 'Create Company' }}
+    </button>
+  </form>
+
+  <div class="alert alert-success" *ngIf="successMessage">
+    {{ successMessage }}
+  </div>
+
+  <div class="alert alert-error" *ngIf="errorMessage">
+    <strong>Error:</strong> {{ errorMessage }}
+  </div>
+</div>

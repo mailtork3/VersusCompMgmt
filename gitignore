@@ -1,0 +1,97 @@
+# ============================================================
+# .NET / C#
+# ============================================================
+
+# Build output
+backend/bin/
+backend/obj/
+
+# NuGet packages
+*.nupkg
+*.snupkg
+.nuget/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+
+# Rider / ReSharper
+.idea/
+*.DotSettings.user
+
+# Visual Studio Code
+.vscode/
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Publish output
+backend/publish/
+
+# Secrets / local overrides — never commit these
+backend/appsettings.Local.json
+backend/appsettings.*.Local.json
+*.pfx
+*.p12
+
+# ============================================================
+# Angular / Node.js
+# ============================================================
+
+# Dependencies
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+frontend/.angular/
+
+# Environment files — keep .example files, ignore actual values
+frontend/src/environments/environment.local.ts
+*.env
+.env
+.env.*
+!.env.example
+
+# Test cache
+frontend/coverage/
+frontend/.nyc_output/
+
+# Vitest cache
+frontend/.vitest/
+
+# ============================================================
+# Docker
+# ============================================================
+
+# Local override compose file
+docker-compose.override.yml
+docker-compose.local.yml
+
+# ============================================================
+# macOS
+# ============================================================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# ============================================================
+# Logs & temp files
+# ============================================================
+
+*.log
+logs/
+npm-debug.log*
+
+# ============================================================
+# PDF / binary assets (project-specific)
+# ============================================================
+
+*.pdf
