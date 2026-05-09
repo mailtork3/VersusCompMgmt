@@ -20,7 +20,7 @@ A full-stack application for managing company information. Built with a **.NET 8
 
 ---
 
-## Features
+## Features..
 
 - **Create Companies** — submit a company name and website URL with full server-side and client-side validation
 - **List Companies** — view all stored companies in a sortable table
